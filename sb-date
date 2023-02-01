@@ -1,0 +1,5 @@
+#!/bin/sh
+
+emoji=""
+time=$(timedatectl | sed -n 1p | tr -s ' ' | cut -d' ' -f 4-6)
+printf "$emoji $time"

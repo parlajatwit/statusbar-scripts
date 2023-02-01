@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# prints battery icon and percent left
+
+case $BLOCK_BUTTON in
+	1) xbacklight -inc 10 ;;
+	2) xbacklight -set 50 ;;
+	3) xbacklight -dec 10 ;;
+esac
+
+icons=(     )
+
+emoji=${icons[1]}
+battery="/sys/class/power_supply/BAT0"
+
+status=$(cat $battery/status)
+if [ "$status" == "Charging" ]; then
+	status=${icons[5]}
+else
+	status=" "
+fi
+
+percent=$(cat $battery/capacity)
+if [ $percent -gt 75 ]; then
+	emoji=${icons[4]}
+elif [ $percent -gt 50 ]; then 
+	emoji=${icons[3]}
+elif [ $percent -gt 25 ]; then
+	emoji=${icons[2]}
+elif [ $percent -gt 12 ]; then
+	emoji=${icons[1]}
+else
+	emoji=${icons[0]}
+fi
+printf "%s%s %s%%" "$emoji" "$status" "$percent"

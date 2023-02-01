@@ -1,0 +1,29 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+	1) pamixer -i 3 ;;
+	2) pamixer -t ;;
+	3) pamixer -d 3 ;;
+esac
+
+volume="$(pamixer --get-volume)"
+mute="$(pamixer --get-mute)"
+icons=(󰖁 󰝟 󰕿 󰖀 󰕾)
+emoji=$icons[0]
+
+if [ $mute == "true" ]; then
+	emoji=${icons[0]}
+	printf "%s %s" $emoji $volume
+	exit
+fi
+
+if [ $volume -gt 66 ]; then
+	emoji=${icons[4]}
+elif [ $volume -gt 33 ]; then
+	emoji=${icons[3]}
+elif [ $volume -gt 0 ]; then
+	emoji=${icons[2]}
+elif [ $volume -eq 0 ]; then
+	emoji=${icons[1]}
+fi
+printf "%s %s" $emoji $volume
