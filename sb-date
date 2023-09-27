@@ -1,5 +1,5 @@
 #!/bin/sh
 
-emoji=""
-time=$(timedatectl | sed -n 1p | tr -s ' ' | cut -d' ' -f 4-6)
+emoji="󰃭"
+time=$(date | sed 's/ EDT 2023//')
 printf "$emoji $time"

@@ -1,6 +1,6 @@
 #!/bin/sh
 
 emoji="󰍛"
-free=$(free -m | sed -n 2p | tr -s ' ' | cut -d' ' -f 3)
-total=$(free -m | sed -n 2p | tr -s ' ' | cut -d' ' -f 2)
+free=$(free --mega | sed -n 2p | tr -s ' ' | cut -d' ' -f 3)
+total=$(free --mega | sed -n 2p | tr -s ' ' | cut -d' ' -f 2)
 printf "%s %s/%s" $emoji $free $total
