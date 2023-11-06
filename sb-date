@@ -1,5 +1,5 @@
 #!/bin/sh
 
 emoji="󰃭"
-time=$(date | sed 's/ EDT 2023//')
+time=$(date | sed 's/ E[SD]T 2023//')
 printf "$emoji $time"
